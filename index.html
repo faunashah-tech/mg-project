@@ -14,6 +14,7 @@
             --cream: #F9F6F0;
             --white: #FFFFFF;
             --text-main: #333333;
+            --success: #2e7d32;
         }
 
         /* --- GLOBAL STYLES --- */
@@ -21,14 +22,15 @@
         body { font-family: 'Inter', sans-serif; background-color: var(--cream); color: var(--text-main); line-height: 1.6; }
         h1, h2, h3, h4 { font-family: 'Playfair Display', serif; color: var(--espresso); }
         a { text-decoration: none; color: inherit; cursor: pointer; }
-        .btn { display: inline-block; background-color: var(--gold); color: var(--espresso); padding: 12px 28px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; border: none; border-radius: 4px; cursor: pointer; transition: background 0.3s; }
+        .btn { display: inline-block; background-color: var(--gold); color: var(--espresso); padding: 12px 28px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; border: none; border-radius: 4px; cursor: pointer; transition: background 0.3s; text-align: center; }
         .btn:hover { background-color: #bfa030; }
+        .btn-full { width: 100%; font-size: 1.1rem; padding: 15px; }
 
         /* --- NAVIGATION --- */
         nav { background-color: var(--espresso); color: var(--white); padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
         .logo { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 700; color: var(--gold); letter-spacing: 2px; }
         .nav-links { list-style: none; display: flex; gap: 1.5rem; flex-wrap: wrap; }
-        .nav-links li { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; transition: color 0.3s; }
+        .nav-links li { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; transition: color 0.3s; cursor: pointer; }
         .nav-links li:hover, .nav-links li.active { color: var(--gold); }
 
         /* --- PAGE ROUTING SYSTEM --- */
@@ -57,13 +59,27 @@
 
         /* --- PRODUCTS PAGE --- */
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2.5rem; }
-        .product-card { background: var(--white); border-radius: 8px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: transform 0.3s; text-align: center; }
+        .product-card { background: var(--white); border-radius: 8px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: transform 0.3s; text-align: center; display: flex; flex-direction: column; }
         .product-card:hover { transform: translateY(-10px); }
         .product-img { width: 100%; height: 250px; object-fit: cover; border-bottom: 3px solid var(--gold); }
-        .product-info { padding: 2rem; }
+        .product-info { padding: 2rem; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
         .product-info h3 { font-size: 1.5rem; margin-bottom: 1rem; }
-        .product-price { color: var(--gold); font-weight: 600; font-size: 1.2rem; margin-top: 1rem; display: block; }
+        .product-price { color: var(--gold); font-weight: 600; font-size: 1.2rem; margin: 1rem 0; display: block; }
 
+        /* --- ORDER NOW / SUBSCRIPTION PAGE --- */
+        .order-wrapper { display: flex; flex-wrap: wrap; gap: 3rem; background: var(--white); padding: 3rem; border-radius: 8px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); }
+        .order-left, .order-right { flex: 1; min-width: 300px; }
+        .order-item-select { width: 100%; padding: 15px; font-size: 1.1rem; border: 1px solid #ccc; border-radius: 4px; margin-bottom: 2rem; font-family: 'Inter', sans-serif; cursor: pointer; }
+        
+        .plan-option { border: 2px solid #e0e0e0; border-radius: 8px; padding: 1.5rem; margin-bottom: 1.5rem; cursor: pointer; transition: all 0.3s; display: flex; align-items: flex-start; gap: 1rem; }
+        .plan-option:hover { border-color: var(--gold); }
+        .plan-option.selected { border-color: var(--gold); background-color: #faf7f0; }
+        .plan-option input[type="radio"] { margin-top: 5px; transform: scale(1.2); cursor: pointer; }
+        .plan-details h4 { margin-bottom: 0.5rem; font-size: 1.2rem; display: flex; align-items: center; gap: 10px; }
+        .badge { background: var(--gold); color: var(--espresso); font-size: 0.75rem; padding: 3px 8px; border-radius: 12px; font-weight: bold; text-transform: uppercase; }
+        .plan-details p { font-size: 0.9rem; color: #555; }
+        .plan-details ul { margin-top: 10px; padding-left: 20px; font-size: 0.9rem; color: var(--success); font-weight: 600; }
+        
         /* --- CONTACT PAGE --- */
         .contact-wrapper { display: flex; gap: 4rem; flex-wrap: wrap; }
         .contact-info, .contact-form { flex: 1; min-width: 300px; }
@@ -94,8 +110,10 @@
             <li onclick="navigate('home')" id="nav-home" class="active">Home</li>
             <li onclick="navigate('about')" id="nav-about">About Us</li>
             <li onclick="navigate('technology')" id="nav-technology">Technology</li>
-            <li onclick="navigate('products')" id="nav-products">Our Blends</li>
-            <li onclick="navigate('packaging')" id="nav-packaging">Packaging</li>
+            <li onclick="navigate('products')" id="nav-products">Blends</li>
+            <li onclick="navigate('app')" id="nav-app">The App</li>
+            <li onclick="navigate('sustainability')" id="nav-sustainability">Sustainability</li>
+            <li onclick="navigate('order')" id="nav-order" style="color: var(--gold); font-weight: bold;">Order Now</li>
             <li onclick="navigate('contact')" id="nav-contact">Contact</li>
         </ul>
     </nav>
@@ -109,7 +127,7 @@
                 <input type="text" placeholder="Your Name" required>
                 <input type="email" placeholder="Email Address" required>
                 <input type="tel" placeholder="Phone Number" required>
-                <button type="submit" class="btn">Subscribe Now</button>
+                <button type="submit" class="btn btn-full">Subscribe Now</button>
             </form>
         </div>
     </div>
@@ -122,7 +140,7 @@
                 <div class="hero-content">
                     <h1>Wake With Purpose</h1>
                     <p>Vitamin-fortified, nutrient-enriched specialty coffee designed to deliver measurable health benefits without compromising on taste.</p>
-                    <button class="btn" onclick="navigate('products')">Shop The Blends</button>
+                    <button class="btn" onclick="navigate('order')">Order Now</button>
                 </div>
             </div>
             
@@ -139,7 +157,7 @@
                 <div class="split-layout">
                     <div class="split-text">
                         <h3>Born Now. Because Health Doesn't Wait.</h3>
-                        <p>Bornow Coffee was conceptualised in 2024 by four business management graduates in Surat, Gujarat. We noticed a simultaneous convergence of two massive trends: the undeniable rise of premium coffee culture and the urgent, post-pandemic demand for daily wellness.</p>
+                        <p>Bornow Coffee was conceptualised in 2024 by four business management graduates in Surat, Gujarat. We noticed a simultaneous convergence of two massive trends: the undeniable rise of premium coffee culture and the urgent demand for daily wellness.</p>
                         <br>
                         <p>However, consumers were forced to choose between two separate habits—their delicious morning coffee, and their clinical daily supplements. <strong>We decided to eliminate this friction entirely.</strong> The name Bornow is a fusion of "Born" and "Now," embodying our ethos that optimal nutrition must be seamlessly woven into the rhythm of daily life.</p>
                     </div>
@@ -156,38 +174,63 @@
                 
                 <div class="split-layout">
                     <div class="split-image">
-                        <img src="https://images.unsplash.com/photo-1498603536246-15572faa569c?auto=format&fit=crop&w=800&q=80" alt="Scientific coffee brewing">
+                        <img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=800&q=80" alt="Scientific coffee brewing apparatus">
                     </div>
                     <div class="split-text">
                         <h3>Micro-Encapsulation Delivery System</h3>
-                        <p>The technical challenge at the heart of functional coffee is simple: how do you incorporate heat-sensitive vitamins into a product roasted at over 200°C and brewed with boiling water?</p>
+                        <p>The technical challenge at the heart of functional coffee is simple: how do you incorporate heat-sensitive vitamins into a product roasted at over 200°C and brewed with near-boiling water?</p>
                         <br>
-                        <p>Partnering with food technology experts, we developed our proprietary MEDS framework:</p>
+                        <p>Partnering with the Department of Food Technology at a leading Gujarat-based university[cite: 83], we developed our proprietary MEDS framework—a three-stage approach that guarantees bioavailability:</p>
                         <ul style="margin-top: 15px; margin-left: 20px; line-height: 1.8;">
-                            <li><strong>Stage 1: Pre-Roast Coating.</strong> Heat-stable minerals (like Zinc and Calcium) are infused into the green bean matrix before roasting.</li>
-                            <li><strong>Stage 2: Post-Roast Micro-Encapsulation.</strong> Heat-sensitive vitamins (B-complex, C, D3) are encased in a protective lipid membrane that survives brewing and breaks down only in the gut for maximum bioavailability.</li>
-                            <li><strong>Stage 3: Cold-Addition.</strong> Probiotics and delicate extracts are vacuum tumbled post-roast to prevent oxidation.</li>
+                            <li><strong>Stage 1: Pre-Roast Coating.</strong> Heat-stable minerals (like Zinc, Manganese, and Calcium) are infused into the green bean matrix through a controlled aqueous infusion process for 18-24 hours at 12°C before roasting[cite: 86].</li>
+                            <li><strong>Stage 2: Post-Roast Micro-Encapsulation.</strong> Heat-sensitive vitamins (B-complex, C, D3) are encased in a protective lipid membrane derived from sunflower lecithin[cite: 89]. This "enteric coating" survives brewing and breaks down only in the gut's slightly alkaline environment.</li>
+                            <li><strong>Stage 3: Cold-Addition.</strong> Probiotics (10 billion CFU) and delicate adaptogenic extracts are vacuum tumbled [cite: 93] post-roast using an OSA-modified starch carrier [cite: 94] to prevent oxidation during grinding and short-term storage.</li>
                         </ul>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="packaging" class="page-section">
+        <section id="app" class="page-section">
             <div class="container">
-                <h2 class="section-title">Sustainable Packaging</h2>
+                <h2 class="section-title">Coming Soon: The Bornow App</h2>
                 
                 <div class="split-layout reverse">
                     <div class="split-image">
-                        <img src="https://images.unsplash.com/photo-1550450339-e7a4787a2074?auto=format&fit=crop&w=800&q=80" alt="Premium coffee packaging">
+                        <img src="https://images.unsplash.com/photo-1616423640778-28d1b53229bd?auto=format&fit=crop&w=800&q=80" alt="Person using smartphone with coffee">
+                    </div>
+                    <div class="split-text">
+                        <h3>Your Personalized Wellness Companion</h3>
+                        <p>Launching in Q3 2026[cite: 292], the Bornow Mobile App is designed to seamlessly integrate your daily coffee ritual with your overarching health goals.</p>
+                        <br>
+                        <ul style="margin-top: 15px; margin-left: 20px; line-height: 1.8;">
+                            <li><strong>Track Your Intake:</strong> Automatically log your daily vitamin and mineral consumption with every cup you brew.</li>
+                            <li><strong>AI Wellness Check-In:</strong> An AI-powered feature that correlates your product consumption patterns with self-reported energy, focus, and wellness metrics[cite: 293].</li>
+                            <li><strong>Seamless Subscriptions:</strong> Manage your deliveries, pause orders, or swap blends with a single tap.</li>
+                            <li><strong>Community & Rewards:</strong> Engage with a community of Bornow users, unlock personalized brew recommendations, and earn loyalty perks.</li>
+                        </ul>
+                        <br>
+                        <button class="btn" onclick="document.getElementById('newsletterModal').style.display = 'flex';">Join the Waitlist</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="sustainability" class="page-section">
+            <div class="container">
+                <h2 class="section-title">Sustainability & Impact</h2>
+                
+                <div class="split-layout reverse">
+                    <div class="split-image">
+                        <img src="https://images.unsplash.com/photo-1550450339-e7a4787a2074?auto=format&fit=crop&w=800&q=80" alt="Premium eco coffee packaging">
                     </div>
                     <div class="split-text">
                         <h3>Designed for the Planet</h3>
                         <p>Wellness extends beyond the individual to the environment we inhabit. Bornow Coffee is deeply committed to minimizing our environmental footprint without compromising the freshness of our specialty blends.</p>
                         <br>
-                        <p>Our Phase 1 packaging utilizes <strong>kraft paper stand-up pouches with a bio-based laminate</strong> and a recyclable aluminium degassing valve. This currently achieves approximately 72% recycled material content.</p>
+                        <p><strong>Sustainable Sourcing:</strong> All our coffee is sourced from estates holding or pursuing Rainforest Alliance Certification. Through our <em>Bornow Farmer Connect Programme</em>, we work directly with farming families in Coorg, providing agricultural training and guaranteed purchase contracts.</p>
                         <br>
-                        <p><strong>Our Target:</strong> By FY28, all Bornow Coffee packaging will be 100% fully compostable or recyclable, aligning with our broader goal to achieve carbon neutrality across all operations by 2030.</p>
+                        <p><strong>Eco-Packaging:</strong> Our current pouches achieve 72% recycled material content using kraft paper and bio-based laminates. <strong>Our Target:</strong> By FY28, all Bornow Coffee packaging will be 100% fully compostable or recyclable.</p>
                     </div>
                 </div>
             </div>
@@ -200,33 +243,119 @@
                     <div class="product-card">
                         <img src="https://images.unsplash.com/photo-1559525839-b184a4d698c7?auto=format&fit=crop&w=600&q=80" alt="Immunity Blend" class="product-img">
                         <div class="product-info">
-                            <h3>Immunity Blend</h3>
-                            <p>Arabica coffee enriched with Vitamin C, Zinc, and Elderberry Extract.</p>
-                            <span class="product-price">₹549</span>
+                            <div>
+                                <h3>Immunity Blend</h3>
+                                <p>Arabica coffee enriched with Vitamin C, Zinc, and Elderberry Extract.</p>
+                            </div>
+                            <div>
+                                <span class="product-price">₹549</span>
+                                <button class="btn btn-full" onclick="navigate('order')">Buy Now</button>
+                            </div>
                         </div>
                     </div>
                     <div class="product-card">
                         <img src="https://images.unsplash.com/photo-1611162458324-aae1eb4129a4?auto=format&fit=crop&w=600&q=80" alt="Energy & Focus" class="product-img">
                         <div class="product-info">
-                            <h3>Energy & Focus</h3>
-                            <p>Arabica-Robusta blend fortified with B-Complex Vitamins and Lion's Mane.</p>
-                            <span class="product-price">₹749</span>
+                            <div>
+                                <h3>Energy & Focus</h3>
+                                <p>Arabica-Robusta blend fortified with B-Complex Vitamins and Lion's Mane.</p>
+                            </div>
+                            <div>
+                                <span class="product-price">₹749</span>
+                                <button class="btn btn-full" onclick="navigate('order')">Buy Now</button>
+                            </div>
                         </div>
                     </div>
                     <div class="product-card">
                         <img src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=600&q=80" alt="Bone & Beauty" class="product-img">
                         <div class="product-info">
-                            <h3>Bone & Beauty</h3>
-                            <p>Enriched with Vitamin D3, Calcium, Collagen Peptides, and Biotin.</p>
-                            <span class="product-price">₹649</span>
+                            <div>
+                                <h3>Bone & Beauty</h3>
+                                <p>Enriched with Vitamin D3, Calcium, Collagen Peptides, and Biotin.</p>
+                            </div>
+                            <div>
+                                <span class="product-price">₹649</span>
+                                <button class="btn btn-full" onclick="navigate('order')">Buy Now</button>
+                            </div>
                         </div>
                     </div>
                     <div class="product-card">
                         <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=600&q=80" alt="Gut Shield" class="product-img">
                         <div class="product-info">
-                            <h3>Gut Shield</h3>
-                            <p>Medium-roast with Probiotics, Prebiotics, and Vitamin B1.</p>
-                            <span class="product-price">₹599</span>
+                            <div>
+                                <h3>Gut Shield</h3>
+                                <p>Medium-roast with Probiotics, Prebiotics, and Vitamin B1.</p>
+                            </div>
+                            <div>
+                                <span class="product-price">₹599</span>
+                                <button class="btn btn-full" onclick="navigate('order')">Buy Now</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="order" class="page-section">
+            <div class="container">
+                <h2 class="section-title">Complete Your Order</h2>
+                
+                <div class="order-wrapper">
+                    <div class="order-left">
+                        <h3>1. Select Your Blend</h3>
+                        <br>
+                        <select class="order-item-select" id="blendSelect" onchange="updatePrice()">
+                            <option value="549">Immunity Blend - ₹549</option>
+                            <option value="749">Energy & Focus - ₹749</option>
+                            <option value="649">Bone & Beauty - ₹649</option>
+                            <option value="599">Gut Shield - ₹599</option>
+                            <option value="899">Starter Sampler Kit (All 4) - ₹899</option>
+                        </select>
+
+                        <h3>2. Delivery Information</h3>
+                        <br>
+                        <div class="form-group">
+                            <input type="text" placeholder="Full Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" placeholder="Shipping Address" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" placeholder="Phone Number" required>
+                        </div>
+                    </div>
+
+                    <div class="order-right">
+                        <h3>3. Choose Your Plan</h3>
+                        <br>
+                        
+                        <div class="plan-option" id="plan-onetime" onclick="selectPlan('onetime')">
+                            <input type="radio" name="plan" checked>
+                            <div class="plan-details">
+                                <h4>One-Time Purchase</h4>
+                                <p>Standard delivery rates apply. Perfect for trying us out.</p>
+                            </div>
+                        </div>
+
+                        <div class="plan-option selected" id="plan-subscribe" onclick="selectPlan('subscribe')">
+                            <input type="radio" name="plan">
+                            <div class="plan-details">
+                                <h4>Subscribe & Save <span class="badge">Most Popular</span></h4>
+                                <p>Never run out of your daily functional coffee.</p>
+                                <ul>
+                                    <li>✓ 15% Recurring Discount</li>
+                                    <li>✓ Free Delivery on Every Order</li>
+                                    <li>✓ Free Monthly Wellness Consultation</li>
+                                    <li>✓ Priority Access to New Launches</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 2rem; border-top: 2px solid #eee; padding-top: 1.5rem;">
+                            <h3 style="display: flex; justify-content: space-between;">Total: <span id="displayTotal">₹549</span></h3>
+                            <br>
+                            <button class="btn btn-full" onclick="processOrder()">Proceed to Checkout</button>
+                            <p style="text-align: center; font-size: 0.8rem; margin-top: 10px; color: #777;">Secure payment gateway simulated for demo purposes.</p>
                         </div>
                     </div>
                 </div>
@@ -280,11 +409,17 @@
     </footer>
 
     <script>
+        let isSubscription = true; // Default plan
+
         // Trigger Pop-Up on Load
         window.onload = function() {
             setTimeout(function() {
                 document.getElementById('newsletterModal').style.display = 'flex';
             }, 2000); 
+            
+            // Set initial state for order form
+            document.getElementById('plan-subscribe').querySelector('input').checked = true;
+            updatePrice();
         }
 
         // Close Pop-Up
@@ -317,6 +452,42 @@
             document.getElementById('nav-' + pageId).classList.add('active');
 
             window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Order Logic
+        function selectPlan(planType) {
+            isSubscription = (planType === 'subscribe');
+            
+            // Update UI
+            document.getElementById('plan-onetime').classList.remove('selected');
+            document.getElementById('plan-subscribe').classList.remove('selected');
+            
+            document.getElementById('plan-onetime').querySelector('input').checked = false;
+            document.getElementById('plan-subscribe').querySelector('input').checked = false;
+
+            const selectedDiv = document.getElementById('plan-' + planType);
+            selectedDiv.classList.add('selected');
+            selectedDiv.querySelector('input').checked = true;
+
+            updatePrice();
+        }
+
+        function updatePrice() {
+            const basePrice = parseInt(document.getElementById('blendSelect').value);
+            let finalPrice = basePrice;
+            
+            // Apply 15% discount if subscription is selected
+            if (isSubscription) {
+                finalPrice = Math.round(basePrice * 0.85);
+            }
+            
+            document.getElementById('displayTotal').innerText = '₹' + finalPrice;
+        }
+
+        function processOrder() {
+            const planText = isSubscription ? "Subscription (15% Off Applied)" : "One-Time Purchase";
+            const total = document.getElementById('displayTotal').innerText;
+            alert("Redirecting to secure payment gateway...\n\nOrder Summary:\nPlan: " + planText + "\nTotal: " + total);
         }
     </script>
 </body>
