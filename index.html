@@ -4,173 +4,247 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bornow Coffee | Wake With Purpose</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        /* Premium Warmth Brand Identity */
+        /* --- BRAND VARIABLES --- */
         :root {
-            --espresso-brown: #3E2723;
-            --warm-gold: #D4AF37;
-            --cream-bg: #FAF3E0;
-            --text-dark: #2D2D2D;
+            --espresso: #2C1E16;
+            --mocha: #4A3525;
+            --gold: #D4AF37;
+            --cream: #F9F6F0;
             --white: #FFFFFF;
+            --text-main: #333333;
         }
 
-        body {
-            font-family: 'Helvetica Neue', Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: var(--cream-bg);
-            color: var(--text-dark);
-            line-height: 1.6;
-        }
+        /* --- GLOBAL STYLES --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--cream); color: var(--text-main); line-height: 1.6; }
+        h1, h2, h3, h4 { font-family: 'Playfair Display', serif; color: var(--espresso); }
+        a { text-decoration: none; color: inherit; cursor: pointer; }
+        .btn { display: inline-block; background-color: var(--gold); color: var(--espresso); padding: 12px 28px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; border: none; border-radius: 4px; cursor: pointer; transition: background 0.3s; }
+        .btn:hover { background-color: #bfa030; }
 
-        header {
-            background-color: var(--espresso-brown);
-            color: var(--warm-gold);
-            text-align: center;
-            padding: 4rem 1rem;
-        }
+        /* --- NAVIGATION --- */
+        nav { background-color: var(--espresso); color: var(--white); padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .logo { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 700; color: var(--gold); letter-spacing: 2px; }
+        .nav-links { list-style: none; display: flex; gap: 2rem; }
+        .nav-links li { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; transition: color 0.3s; }
+        .nav-links li:hover, .nav-links li.active { color: var(--gold); }
 
-        header h1 {
-            font-size: 3.5rem;
-            margin: 0;
-            letter-spacing: 2px;
-        }
+        /* --- PAGE ROUTING SYSTEM --- */
+        .page-section { display: none; animation: fadeIn 0.4s ease-in-out; }
+        .page-section.is-active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        header p {
-            font-size: 1.5rem;
-            margin-top: 10px;
-            font-weight: 300;
-        }
+        /* --- HERO SECTION (HOME) --- */
+        .hero { position: relative; height: 80vh; display: flex; align-items: center; justify-content: center; text-align: center; color: var(--white); background-color: var(--espresso); overflow: hidden; }
+        .hero img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.45; }
+        .hero-content { position: relative; z-index: 10; max-width: 800px; padding: 2rem; }
+        .hero h1 { color: var(--gold); font-size: 4rem; margin-bottom: 1rem; }
+        .hero p { font-size: 1.2rem; font-weight: 300; margin-bottom: 2rem; text-shadow: 1px 1px 4px rgba(0,0,0,0.5); }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
+        /* --- PRODUCTS PAGE --- */
+        .container { max-width: 1200px; margin: 4rem auto; padding: 0 2rem; }
+        .section-title { text-align: center; font-size: 2.5rem; margin-bottom: 3rem; }
+        .section-title::after { content: ''; display: block; width: 60px; height: 3px; background: var(--gold); margin: 15px auto 0; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2.5rem; }
+        .product-card { background: var(--white); border-radius: 8px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: transform 0.3s; text-align: center; }
+        .product-card:hover { transform: translateY(-10px); }
+        .product-img { width: 100%; height: 250px; object-fit: cover; border-bottom: 3px solid var(--gold); }
+        .product-info { padding: 2rem; }
+        .product-info h3 { font-size: 1.5rem; margin-bottom: 1rem; }
+        .product-price { color: var(--gold); font-weight: 600; font-size: 1.2rem; margin-top: 1rem; display: block; }
 
-        h2 {
-            color: var(--espresso-brown);
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 2rem;
-            border-bottom: 2px solid var(--warm-gold);
-            display: inline-block;
-            padding-bottom: 0.5rem;
-        }
+        /* --- CONTACT PAGE --- */
+        .contact-wrapper { display: flex; gap: 4rem; flex-wrap: wrap; }
+        .contact-info, .contact-form { flex: 1; min-width: 300px; }
+        .form-group { margin-bottom: 1.5rem; }
+        .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; font-size: 0.9rem; }
+        .form-group input, .form-group textarea { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; font-family: 'Inter', sans-serif; }
+        .form-group textarea { resize: vertical; height: 150px; }
 
-        .section-center {
-            text-align: center;
-        }
+        /* --- NEWSLETTER POP-UP MODAL --- */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(44, 30, 22, 0.8); display: none; align-items: center; justify-content: center; z-index: 1000; backdrop-filter: blur(5px); }
+        .modal-content { background: var(--cream); padding: 3rem; border-radius: 8px; width: 90%; max-width: 450px; text-align: center; position: relative; border-top: 5px solid var(--gold); }
+        .close-btn { position: absolute; top: 15px; right: 20px; font-size: 1.5rem; cursor: pointer; color: var(--text-main); font-weight: bold; }
+        .modal-content h2 { margin-bottom: 1rem; }
+        .modal-content p { margin-bottom: 1.5rem; font-size: 0.9rem; }
+        .modal-content input { width: 100%; padding: 12px; margin-bottom: 1rem; border: 1px solid #ccc; border-radius: 4px; }
+        .modal-content .btn { width: 100%; }
 
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .card {
-            background-color: var(--white);
-            border-radius: 8px;
-            padding: 2rem;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            text-align: center;
-            transition: transform 0.3s ease;
-            border-top: 4px solid var(--warm-gold);
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-        }
-
-        .card h3 {
-            color: var(--espresso-brown);
-            margin-top: 0;
-        }
-
-        .tech-section {
-            background-color: var(--espresso-brown);
-            color: var(--cream-bg);
-            padding: 4rem 2rem;
-            margin-top: 4rem;
-        }
-
-        .tech-section h2 {
-            color: var(--warm-gold);
-            border-bottom-color: var(--cream-bg);
-        }
-
-        footer {
-            text-align: center;
-            padding: 2rem;
-            background-color: var(--text-dark);
-            color: var(--white);
-            margin-top: 0;
-        }
-
-        .btn {
-            display: inline-block;
-            background-color: var(--warm-gold);
-            color: var(--espresso-brown);
-            padding: 10px 20px;
-            text-decoration: none;
-            font-weight: bold;
-            border-radius: 4px;
-            margin-top: 1rem;
-        }
+        /* --- FOOTER --- */
+        footer { background-color: var(--espresso); color: var(--white); text-align: center; padding: 3rem 1rem; margin-top: 4rem; }
+        footer p { opacity: 0.7; font-size: 0.9rem; margin-top: 1rem; }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>BORNOW COFFEE </h1>
-        <p>Wake With Purpose [cite: 2]</p>
-    </header>
+    <nav>
+        <div class="logo">BORNOW</div>
+        <ul class="nav-links">
+            <li onclick="navigate('home')" id="nav-home" class="active">Home</li>
+            <li onclick="navigate('products')" id="nav-products">Our Blends</li>
+            <li onclick="navigate('contact')" id="nav-contact">Contact Us</li>
+        </ul>
+    </nav>
 
-    <div class="container section-center">
-        <h2>About Us</h2>
-        <p>We are a functional beverage company designing vitamin-fortified, nutrient-enriched coffee beverages[cite: 18, 20]. Conceptualised by Flora Shah, Nidhi Ravindran, Sujal Patel, and Rudra Satasiya[cite: 19]. The name <strong>Bornow</strong> fuses "Born" and "Now"—embodying the ethos that health does not wait for tomorrow[cite: 21].</p>
-    </div>
-
-    <div class="container">
-        <div class="section-center">
-            <h2>Our Blends</h2>
-            <p>Formulated to deliver measurable health benefits without compromising on taste or aroma[cite: 20].</p>
-        </div>
-        <div class="grid">
-            <div class="card">
-                <h3>Immunity Blend [cite: 32]</h3>
-                <p>Arabica coffee enriched with Vitamin C (500 mg), Zinc (10 mg), and Elderberry Extract targeting immune health[cite: 32].</p>
-            </div>
-            <div class="card">
-                <h3>Energy & Focus [cite: 33]</h3>
-                <p>Arabica-Robusta blend fortified with B-Complex Vitamins, L-Theanine, and Lion's Mane Mushroom Extract for cognitive performance[cite: 33].</p>
-            </div>
-            <div class="card">
-                <h3>Bone & Beauty [cite: 34]</h3>
-                <p>Cold-brew-ready coffee enriched with Vitamin D3, Calcium, Collagen Peptides, and Biotin[cite: 34].</p>
-            </div>
-            <div class="card">
-                <h3>Gut Shield [cite: 35]</h3>
-                <p>Medium-roast coffee with Probiotics, Prebiotics, and Vitamin B1 targeting digestive wellness[cite: 35].</p>
-            </div>
+    <div class="modal-overlay" id="newsletterModal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <h2>Join the Bornow Family</h2>
+            <p>Subscribe to our newsletter for 15% off your first order, exclusive wellness insights, and priority access to new blends.</p>
+            <form onsubmit="handleSubscribe(event)">
+                <input type="text" placeholder="Your Name" required>
+                <input type="email" placeholder="Email Address" required>
+                <input type="tel" placeholder="Phone Number (e.g., +91...)" required>
+                <button type="submit" class="btn">Subscribe Now</button>
+            </form>
         </div>
     </div>
 
-    <div class="tech-section">
-        <div class="container section-center">
-            <h2>The Science: MEDS Technology</h2>
-            <p>Our proprietary <strong>Micro-Encapsulation Delivery System (MEDS)</strong> solves the ultimate challenge: protecting heat-sensitive vitamins during roasting and brewing[cite: 82, 83].</p>
-            <p>Using a food-grade lipid micro-encapsulation carrier, we encase vitamins in a protective membrane that survives the brewing process and ensures bioavailability in the gut[cite: 89, 90].</p>
-        </div>
-    </div>
+    <main>
+        
+        <section id="home" class="page-section is-active">
+            <div class="hero">
+                <img src="https://images.unsplash.com/photo-1497935586351-b67a49e012bf?auto=format&fit=crop&w=1920&q=80" alt="Pouring Coffee">
+                <div class="hero-content">
+                    <h1>Wake With Purpose</h1>
+                    <p>Vitamin-fortified, nutrient-enriched specialty coffee designed to deliver measurable health benefits without compromising on taste.</p>
+                    <button class="btn" onclick="navigate('products')">Shop The Blends</button>
+                </div>
+            </div>
+            
+            <div class="container" style="text-align: center; max-width: 800px;">
+                <h2 class="section-title">The MEDS Advantage</h2>
+                <p>How do you incorporate heat-sensitive vitamins into coffee roasted at 200°C? Our proprietary <strong>Micro-Encapsulation Delivery System</strong> encases heat-sensitive vitamins in a protective lipid membrane that survives the brewing process and ensures optimal bioavailability.</p>
+            </div>
+        </section>
+
+        <section id="products" class="page-section">
+            <div class="container">
+                <h2 class="section-title">Our Functional Blends</h2>
+                <div class="grid">
+                    <div class="product-card">
+                        <img src="https://images.unsplash.com/photo-1559525839-b184a4d698c7?auto=format&fit=crop&w=600&q=80" alt="Immunity Blend" class="product-img">
+                        <div class="product-info">
+                            <h3>Immunity Blend</h3>
+                            <p>Arabica coffee enriched with Vitamin C, Zinc, and Elderberry Extract.</p>
+                            <span class="product-price">₹549</span>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <img src="https://images.unsplash.com/photo-1611162458324-aae1eb4129a4?auto=format&fit=crop&w=600&q=80" alt="Energy & Focus" class="product-img">
+                        <div class="product-info">
+                            <h3>Energy & Focus</h3>
+                            <p>Arabica-Robusta blend fortified with B-Complex Vitamins and Lion's Mane.</p>
+                            <span class="product-price">₹749</span>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <img src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=600&q=80" alt="Bone & Beauty" class="product-img">
+                        <div class="product-info">
+                            <h3>Bone & Beauty</h3>
+                            <p>Enriched with Vitamin D3, Calcium, Collagen Peptides, and Biotin.</p>
+                            <span class="product-price">₹649</span>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=600&q=80" alt="Gut Shield" class="product-img">
+                        <div class="product-info">
+                            <h3>Gut Shield</h3>
+                            <p>Medium-roast with Probiotics, Prebiotics, and Vitamin B1.</p>
+                            <span class="product-price">₹599</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="page-section">
+            <div class="container">
+                <h2 class="section-title">Get in Touch</h2>
+                <div class="contact-wrapper">
+                    <div class="contact-info">
+                        <h3>Contact Bornow Coffee</h3>
+                        <br>
+                        <p><strong>Headquarters:</strong><br>SVNIT, Surat, Gujarat 394230</p>
+                        <br><br>
+                        <p><strong>General Inquiries:</strong><br>hello@bornow.in</p>
+                        <br><br>
+                        <p><strong>Founding Team:</strong><br>
+                        Flora Shah (CEO) - flora.shah@bornow.in<br>
+                        Nidhi Ravindran (COO) - nidhi.ravindran@bornow.in<br>
+                        Sujal Patel (CFO) - sujal.patel@bornow.in<br>
+                        Rudra Satasiya (CMO) - rudra.satasiya@bornow.in</p>
+                    </div>
+                    <div class="contact-form">
+                        <form onsubmit="handleContact(event)">
+                            <div class="form-group">
+                                <label>Name</label>
+                                <input type="text" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Message</label>
+                                <textarea required></textarea>
+                            </div>
+                            <button type="submit" class="btn">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
 
     <footer>
-        <h2>Join the Journey</h2>
-        <p>Bornow Coffee Pvt. Ltd. | Surat, Gujarat, India [cite: 7]</p>
-        <p>Website: www.bornow.in [cite: 350]</p>
-        <p><em>Every morning, 1.4 billion Indians wake up. Millions reach for coffee. What if that cup did more? [cite: 353]</em></p>
+        <h2>BORNOW COFFEE PVT. LTD.</h2>
+        <p>Every morning, 1.4 billion Indians wake up. Millions reach for coffee. What if that cup did more?</p>
+        <p>&copy; 2026 Bornow Coffee. All rights reserved.</p>
     </footer>
 
+    <script>
+        // Trigger Pop-Up on Load
+        window.onload = function() {
+            setTimeout(function() {
+                document.getElementById('newsletterModal').style.display = 'flex';
+            }, 2000); 
+        }
+
+        // Close Pop-Up
+        function closeModal() {
+            document.getElementById('newsletterModal').style.display = 'none';
+        }
+
+        // Handle Form Submissions
+        function handleSubscribe(e) {
+            e.preventDefault();
+            alert("Thank you for subscribing! Welcome to the Bornow family.");
+            closeModal();
+        }
+
+        function handleContact(e) {
+            e.preventDefault();
+            alert("Your message has been sent. Our team will get back to you shortly.");
+            e.target.reset();
+        }
+
+        // Page Navigation System
+        function navigate(pageId) {
+            const pages = document.querySelectorAll('.page-section');
+            pages.forEach(page => page.classList.remove('is-active'));
+            
+            document.getElementById(pageId).classList.add('is-active');
+
+            const navItems = document.querySelectorAll('.nav-links li');
+            navItems.forEach(item => item.classList.remove('active'));
+            document.getElementById('nav-' + pageId).classList.add('active');
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
 </body>
 </html>
