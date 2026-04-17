@@ -27,7 +27,7 @@
         /* --- NAVIGATION --- */
         nav { background-color: var(--espresso); color: var(--white); padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
         .logo { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 700; color: var(--gold); letter-spacing: 2px; }
-        .nav-links { list-style: none; display: flex; gap: 2rem; }
+        .nav-links { list-style: none; display: flex; gap: 1.5rem; flex-wrap: wrap; }
         .nav-links li { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; transition: color 0.3s; }
         .nav-links li:hover, .nav-links li.active { color: var(--gold); }
 
@@ -43,10 +43,19 @@
         .hero h1 { color: var(--gold); font-size: 4rem; margin-bottom: 1rem; }
         .hero p { font-size: 1.2rem; font-weight: 300; margin-bottom: 2rem; text-shadow: 1px 1px 4px rgba(0,0,0,0.5); }
 
-        /* --- PRODUCTS PAGE --- */
+        /* --- REUSABLE CONTAINERS & SPLIT LAYOUTS --- */
         .container { max-width: 1200px; margin: 4rem auto; padding: 0 2rem; }
         .section-title { text-align: center; font-size: 2.5rem; margin-bottom: 3rem; }
         .section-title::after { content: ''; display: block; width: 60px; height: 3px; background: var(--gold); margin: 15px auto 0; }
+        
+        .split-layout { display: flex; flex-wrap: wrap; gap: 3rem; align-items: center; margin-bottom: 4rem; }
+        .split-text { flex: 1; min-width: 300px; }
+        .split-text h3 { font-size: 1.8rem; margin-bottom: 1rem; color: var(--mocha); }
+        .split-image { flex: 1; min-width: 300px; border-radius: 8px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.1); border-left: 5px solid var(--gold); }
+        .split-image img { width: 100%; height: auto; display: block; object-fit: cover; }
+        .reverse { flex-direction: row-reverse; }
+
+        /* --- PRODUCTS PAGE --- */
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2.5rem; }
         .product-card { background: var(--white); border-radius: 8px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: transform 0.3s; text-align: center; }
         .product-card:hover { transform: translateY(-10px); }
@@ -83,8 +92,11 @@
         <div class="logo">BORNOW</div>
         <ul class="nav-links">
             <li onclick="navigate('home')" id="nav-home" class="active">Home</li>
+            <li onclick="navigate('about')" id="nav-about">About Us</li>
+            <li onclick="navigate('technology')" id="nav-technology">Technology</li>
             <li onclick="navigate('products')" id="nav-products">Our Blends</li>
-            <li onclick="navigate('contact')" id="nav-contact">Contact Us</li>
+            <li onclick="navigate('packaging')" id="nav-packaging">Packaging</li>
+            <li onclick="navigate('contact')" id="nav-contact">Contact</li>
         </ul>
     </nav>
 
@@ -96,7 +108,7 @@
             <form onsubmit="handleSubscribe(event)">
                 <input type="text" placeholder="Your Name" required>
                 <input type="email" placeholder="Email Address" required>
-                <input type="tel" placeholder="Phone Number (e.g., +91...)" required>
+                <input type="tel" placeholder="Phone Number" required>
                 <button type="submit" class="btn">Subscribe Now</button>
             </form>
         </div>
@@ -115,8 +127,69 @@
             </div>
             
             <div class="container" style="text-align: center; max-width: 800px;">
-                <h2 class="section-title">The MEDS Advantage</h2>
-                <p>How do you incorporate heat-sensitive vitamins into coffee roasted at 200°C? Our proprietary <strong>Micro-Encapsulation Delivery System</strong> encases heat-sensitive vitamins in a protective lipid membrane that survives the brewing process and ensures optimal bioavailability.</p>
+                <h2 class="section-title">The Bornow Difference</h2>
+                <p>You shouldn't have to choose between your morning ritual and your daily nutrition. We bring together premium Arabica and Robusta beans from the estates of Coorg and Chikmagalur with scientifically backed, bioavailability-tested vitamins and functional extracts.</p>
+            </div>
+        </section>
+
+        <section id="about" class="page-section">
+            <div class="container">
+                <h2 class="section-title">Our Story</h2>
+                
+                <div class="split-layout">
+                    <div class="split-text">
+                        <h3>Born Now. Because Health Doesn't Wait.</h3>
+                        <p>Bornow Coffee was conceptualised in 2024 by four business management graduates in Surat, Gujarat. We noticed a simultaneous convergence of two massive trends: the undeniable rise of premium coffee culture and the urgent, post-pandemic demand for daily wellness.</p>
+                        <br>
+                        <p>However, consumers were forced to choose between two separate habits—their delicious morning coffee, and their clinical daily supplements. <strong>We decided to eliminate this friction entirely.</strong> The name Bornow is a fusion of "Born" and "Now," embodying our ethos that optimal nutrition must be seamlessly woven into the rhythm of daily life.</p>
+                    </div>
+                    <div class="split-image">
+                        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80" alt="Team collaborating">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="technology" class="page-section">
+            <div class="container">
+                <h2 class="section-title">The Science of MEDS</h2>
+                
+                <div class="split-layout">
+                    <div class="split-image">
+                        <img src="https://images.unsplash.com/photo-1498603536246-15572faa569c?auto=format&fit=crop&w=800&q=80" alt="Scientific coffee brewing">
+                    </div>
+                    <div class="split-text">
+                        <h3>Micro-Encapsulation Delivery System</h3>
+                        <p>The technical challenge at the heart of functional coffee is simple: how do you incorporate heat-sensitive vitamins into a product roasted at over 200°C and brewed with boiling water?</p>
+                        <br>
+                        <p>Partnering with food technology experts, we developed our proprietary MEDS framework:</p>
+                        <ul style="margin-top: 15px; margin-left: 20px; line-height: 1.8;">
+                            <li><strong>Stage 1: Pre-Roast Coating.</strong> Heat-stable minerals (like Zinc and Calcium) are infused into the green bean matrix before roasting.</li>
+                            <li><strong>Stage 2: Post-Roast Micro-Encapsulation.</strong> Heat-sensitive vitamins (B-complex, C, D3) are encased in a protective lipid membrane that survives brewing and breaks down only in the gut for maximum bioavailability.</li>
+                            <li><strong>Stage 3: Cold-Addition.</strong> Probiotics and delicate extracts are vacuum tumbled post-roast to prevent oxidation.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="packaging" class="page-section">
+            <div class="container">
+                <h2 class="section-title">Sustainable Packaging</h2>
+                
+                <div class="split-layout reverse">
+                    <div class="split-image">
+                        <img src="https://images.unsplash.com/photo-1550450339-e7a4787a2074?auto=format&fit=crop&w=800&q=80" alt="Premium coffee packaging">
+                    </div>
+                    <div class="split-text">
+                        <h3>Designed for the Planet</h3>
+                        <p>Wellness extends beyond the individual to the environment we inhabit. Bornow Coffee is deeply committed to minimizing our environmental footprint without compromising the freshness of our specialty blends.</p>
+                        <br>
+                        <p>Our Phase 1 packaging utilizes <strong>kraft paper stand-up pouches with a bio-based laminate</strong> and a recyclable aluminium degassing valve. This currently achieves approximately 72% recycled material content.</p>
+                        <br>
+                        <p><strong>Our Target:</strong> By FY28, all Bornow Coffee packaging will be 100% fully compostable or recyclable, aligning with our broader goal to achieve carbon neutrality across all operations by 2030.</p>
+                    </div>
+                </div>
             </div>
         </section>
 
